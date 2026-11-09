@@ -92,8 +92,6 @@ The models are close on ROC-AUC; the Random Forest was chosen because it leads o
 - **`predict.py`**:
   - Loads `model.bin`
   - Function to predict the probability that a wine is good
-
-- **`serve.py`**:
   - FastAPI web service (`GET /health`, `POST /predict`)
 
 - **`Dockerfile`**:
@@ -187,11 +185,11 @@ curl -X POST -H "Content-Type: application/json" \
      http://localhost:9696/predict
 ```
 
-**Example response** (this wine returns `not good`; replace the probability with the value you get):
+**Example response**
 ```json
 {
-  "good_probability": 0.0,
-  "prediction": "not good",
+  "good_probability": 0.641,
+  "prediction": "good",
   "threshold": 0.32
 }
 ```
@@ -204,25 +202,3 @@ curl -X POST -H "Content-Type: application/json" \
 - Data preparation, EDA and model selection in `notebook.ipynb`.
 - Trained model and scripts (`train.py`, `predict.py`, `serve.py`).
 
----
-
-### Service Screenshots
-> **TODO:** add a screenshot of the `/docs` page and a successful `/predict` response, for example:
-> `<img src="service_screenshot.png" alt="Service screenshot" width="500">`
-
----
-
-### Known Limitations
-- **Modest ceiling:** individual features are weak predictors, so about half of the "good" flags are false alarms and about a third of good wines are missed at the chosen threshold.
-- **Subjective labels:** scores come from human tasters, so the model learns their preferences, not an absolute truth.
-- **Narrow data:** only Portuguese Vinho Verde wines, with about 1,000 good examples.
-- **Small differences between models:** in cross-validation, the three models are close.
-- **Feature importance is not causation,** and correlated features (alcohol and density) share credit.
-
-**Next steps:** train separate red and white models, add interaction features, check probability calibration, and tune the threshold using the winery's real cost of false alarms versus missed good wines.
-
----
-
-### Acknowledgements
-- **Dataset**: [UCI Machine Learning Repository: Wine Quality](https://archive.ics.uci.edu/dataset/186/wine+quality).
-- **Libraries**: `pandas`, `numpy`, `scikit-learn`, `xgboost`, `fastapi`, `uvicorn`, `pickle`.

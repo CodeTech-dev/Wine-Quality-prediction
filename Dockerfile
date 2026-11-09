@@ -9,8 +9,8 @@ RUN uv sync --frozen --no-dev --no-install-project
 
 ENV PATH="/app/.venv/bin:$PATH"
 
-COPY predict.py serve.py model.bin ./
+COPY predict.py model.bin ./
 
 EXPOSE 9696
 
-CMD ["uvicorn", "serve:app", "--host", "0.0.0.0", "--port", "9696"]
+CMD ["uvicorn", "predict:app", "--host", "0.0.0.0", "--port", "9696"]
