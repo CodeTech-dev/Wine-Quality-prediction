@@ -1,6 +1,6 @@
 # Wine Quality Prediction
 
-## ML Bootcamp Mid-Project
+## ML Zootcamp Midterm-Project
 
 ### Overview
 This project predicts whether a wine will be rated **"good"** by tasters (quality score ≥ 7 out of 10) using only lab measurements such as alcohol, acidity and sulfur dioxide. It covers data preparation, exploratory data analysis (EDA), model training and tuning, and deployment as a web service with **FastAPI** and **Docker**.
